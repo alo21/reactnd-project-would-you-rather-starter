@@ -23,6 +23,9 @@ class Header extends React.Component{
 
                 <Link to={'/leadboard'}><button>Leader Board</button></Link>
 
+
+                <label>my cool name</label>
+
                 <hr/>
 
             </div>
