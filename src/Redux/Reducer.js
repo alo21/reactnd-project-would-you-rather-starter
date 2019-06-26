@@ -1,22 +1,21 @@
+//App code
+function ratherbe(state =[], action) {
+    if (action.type == 'ADD_QUESTION') {
 
-const intitialState = {
-    value: 0
-};
-
-const actions = {
-    'ADD_ONE': addOne
-};
-
-function addOne(state, action) {
-    return{
-        value: [...state.value, action.payload]
+        return state.concat([action.payload])
     }
+
+    return state
 }
 
-const reducer = (state, action) => {
 
-        return 'State'
-    };
+function user(state =[], action) {
+    if (action.type == 'ADD_USER') {
 
+        return state.concat([action.payload])
+    }
 
-export default {reducer, actions};
+    return state
+}
+
+export {ratherbe, user};

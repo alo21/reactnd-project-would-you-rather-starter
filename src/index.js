@@ -7,16 +7,21 @@ import {BrowserRouter} from 'react-router-dom';
 import {createStore} from "redux"
 import reducer from "./Redux/Reducer.js";
 import {Provider} from 'react-redux';
+import user from '/Redux/Reducer.js';
+import ratherbe from '/Redux/Reducer.js';
 
-const store = createStore(reducer);
+import {Redux} from 'Redux'
 
-console.log(store.getState());
 
+const store = createStore(Redux.combineReducers({
+    ratherbe,
+    user
+}))
 
 ReactDOM.render(
     <BrowserRouter>
 
-        <Provider store={store}><App/></Provider>
+        <App/>
 
     </BrowserRouter>, document.getElementById('root'));
 
