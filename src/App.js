@@ -3,8 +3,8 @@ import './App.css';
 import Header from './Header.js'
 import {Route} from 'react-router-dom';
 import Home from './Home.js';
-import New from './New.js';
-import Leadboard from './Leadboard.js';
+import New from './NewQuestion';
+import Leadboard from './Leaderboard';
 
 
 class App extends React.Component{

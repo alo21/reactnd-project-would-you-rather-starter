@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {addUser} from "./Redux/User-actions";
+import {addUser} from "../Redux/User/actions";
 
 
-class Leadboard extends React.Component{
+class Index extends React.Component{
 
     componentDidMount() {
 
@@ -32,9 +32,11 @@ const mapDispatchToProps = dispatch =>{
 
 };
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => {
+    return{};
+};
 
-const leadboard = connect(mapStateToProps, mapDispatchToProps)(Leadboard);
+const leadboard = connect(mapStateToProps, mapDispatchToProps)(Index);
 
 
 export default leadboard;

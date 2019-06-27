@@ -6,12 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux'
-import user from './Redux/User-Reducer.js';
-import ratherbe from './Redux/Ratherbe-Reducer.js';
-
+import user from './Redux/User/reducer.js';
+import questions from './Redux/Question/reducer.js';
 
 const store = createStore(combineReducers({
-    ratherbe,
+    questions,
     user,
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

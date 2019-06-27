@@ -1,18 +1,24 @@
 const initialState = {
-    users: {}
+    users: {},
+    logged: {}
 };
 
 const reducer = (state = initialState, action) => {
 
     if (action.type === 'ADD_USER') {
 
-        console.log("In add User");
-        console.log(action.payload);
-
         return {
             ...state,
             users: action.payload
         }
+    }
+
+    if (action.type === 'LOGIN_USER') {
+        return {
+            ...state,
+            logged: action.payload
+        }
+
     }
 
     return state
