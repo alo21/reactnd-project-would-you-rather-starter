@@ -16,11 +16,11 @@ class App extends React.Component{
 
          <Header className="Header" />
 
-         <Route exact path={"/"} render={()=>(<Home />)}/>
+         <Route exact path={"/"} render={()=>(<Home store={this.props.store}/>)}/>
 
-         <Route path={"/new"} render={()=>(<New />)}/>
+         <Route path={"/new"} render={()=>(<New store={this.props.store}/>)}/>
 
-         <Route path={"/leadboard"} render={()=>(<Leadboard />)}/>
+         <Route path={"/leadboard"} render={()=>(<Leadboard store={this.props.store}/>)}/>
 
 
         </div>

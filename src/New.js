@@ -1,7 +1,15 @@
 import React from 'react';
+import {connect} from "react-redux";
+import {addUser} from "./Redux/User-actions";
+
 
 
 class New extends React.Component{
+
+    componentDidMount() {
+
+        this.props.addUser('Lorenzo');
+    }
 
     render() {
 
@@ -16,4 +24,17 @@ class New extends React.Component{
         )}
 }
 
-export default New;
+const mapDispatchToProps = dispatch =>{
+
+    return {
+        addUser: user => dispatch(addUser(user))
+    };
+
+
+};
+
+const mapStateToProps = state => {};
+
+const newComp = connect(mapStateToProps, mapDispatchToProps)(New);
+
+export default newComp;
