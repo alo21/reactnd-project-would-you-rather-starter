@@ -1,22 +1,32 @@
 const initialState = {
-    users: {},
-    logged: {}
+    users: [],
+    logged: []
 };
 
 const reducer = (state = initialState, action) => {
 
+    let users;
+    let loggedUser;
+
     if (action.type === 'ADD_USER') {
 
-        return {
-            ...state,
-            users: action.payload
-        }
-    }
+        users = state.users;
+        loggedUser = state.logged;
 
-    if (action.type === 'LOGIN_USER') {
+        users.push(action.payload);
+        loggedUser = action.payload;
+
+
         return {
             ...state,
-            logged: action.payload
+            users: users,
+            logged: loggedUser
+        }
+    } else if (action.type === 'LOGOUT') {
+
+        return {
+            ...state,
+            logged: []
         }
 
     }

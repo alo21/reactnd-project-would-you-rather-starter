@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {_getQuestions} from "./_DATA";
 import {addQuestion} from "./Redux/Question/action";
 import QuestionCard from "./QuestionCard.js"
+import UserSelection from './UserSelection'
 
 
 class Home extends React.Component{
@@ -32,10 +33,20 @@ class Home extends React.Component{
 
     render() {
         return(
+
+
             <div>
-                {this.props.questions.questions.map(el => {
-                   return (<QuestionCard question={el}/>)
-                })}
+                {this.props.user.logged.id ?
+
+                    this.props.questions.questions.map(el => {
+                        return (<QuestionCard question={el}/>)
+                    })
+
+                    :
+
+                <UserSelection/>
+
+                }
 
             </div>
         )
@@ -54,7 +65,8 @@ const mapDispatchToProps = dispatch =>{
 
 const mapStateToProps = state => {
     return{
-        questions: state.questions
+        questions: state.questions,
+        user: state.user
     };
 };
 

@@ -14,7 +14,7 @@ class App extends React.Component{
 
         <div className="App">
 
-         <Header className="Header" />
+         <Header className="Header" store={this.props.store}/>
 
          <Route exact path={"/"} render={()=>(<Home store={this.props.store}/>)}/>
 
