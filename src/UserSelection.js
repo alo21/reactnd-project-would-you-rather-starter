@@ -7,7 +7,7 @@ import {loginUser} from "./Redux/User/action";
 
 
 class UserSelection extends React.Component {
-    
+
     render() {
         return (
             <div>

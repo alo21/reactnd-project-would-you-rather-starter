@@ -73,12 +73,18 @@ class Home extends React.Component {
                             <Tab label="Answered question"/>
                         </Tabs>
                     </AppBar>
-
+                        
                     {this.state.section === 0 &&  this.props.questions.questions.map(el => {
-                    return (<QuestionCard question={el}/>)
+
+                        if (!Object.keys(this.props.user.logged.answers).includes(el.id)){return (<QuestionCard question={el}/>)}
+
                     })}
 
-                    {this.state.section === 1 && <p>Item Two</p>}
+                    {this.state.section === 1 &&  this.props.questions.questions.map(el => {
+
+                        if (Object.keys(this.props.user.logged.answers).includes(el.id)){return (<QuestionCard question={el}/>)}
+
+                    })}
 
 
                     </div>

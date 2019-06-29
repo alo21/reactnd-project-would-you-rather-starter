@@ -5,11 +5,6 @@ import {addUser} from "../Redux/User/action";
 
 class Index extends React.Component{
 
-    componentDidMount() {
-
-        this.props.addUser('franco');
-    }
-
     render() {
 
         return(

@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {addUser} from "../Redux/User/action";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -18,18 +20,27 @@ class Index extends React.Component{
                 <p>Complete the question:</p>
 
 
-                <h4>Would you rather ...</h4>
-
-                <input type="text" name="question1"/>
-
-                <p>or</p>
-
-                <input type="text" name="question2"/>
+                <TextField
+                    id="option1"
+                    label="Would you rather..."
+                    margin="normal"
+                />
 
                 <br></br>
                 <br></br>
 
-                <button type="button">Submit</button>
+                <TextField
+                    id="option2"
+                    label="or"
+                    margin="normal"
+                />
+
+                <br></br>
+                <br></br>
+
+                <Button variant="outlined" color="primary">
+                    Submit
+                </Button>
 
             </div>
 
