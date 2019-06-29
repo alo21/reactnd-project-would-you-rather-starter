@@ -10,3 +10,10 @@ export const logoutUser = () => {
         type: 'LOGOUT',
     }
 };
+
+export const loginUser = user => {
+    return {
+        type: 'LOGIN',
+        payload: user
+    }
+};

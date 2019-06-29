@@ -29,6 +29,13 @@ const reducer = (state = initialState, action) => {
             logged: []
         }
 
+    } else if (action.type === 'LOGIN') {
+
+        return {
+            ...state,
+            logged: action.payload
+        }
+
     }
 
     return state

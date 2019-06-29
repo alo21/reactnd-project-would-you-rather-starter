@@ -2,12 +2,30 @@ import React from 'react';
 import {connect} from "react-redux";
 import {_getQuestions} from "./_DATA";
 import {addQuestion} from "./Redux/Question/action";
-import QuestionCard from "./QuestionCard.js"
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import QuestionCard from './QuestionCard'
 import UserSelection from './UserSelection'
 
 
-class Home extends React.Component{
+class Home extends React.Component {
 
+
+    constructor(props) {
+        super(props);
+
+
+        this.state = {
+
+            section: 0
+
+        };
+
+        this.chooseSection = this.chooseSection.bind(this)
+
+
+    }
 
     componentDidMount() {
 
@@ -17,7 +35,7 @@ class Home extends React.Component{
 
             questionsId = Object.values(res);
 
-            questionsId.forEach(question=> {
+            questionsId.forEach(question => {
                 this.props.addQuestion(question);
 
             });
@@ -31,20 +49,43 @@ class Home extends React.Component{
 
     }
 
+
+    chooseSection = function (event, newValue) {
+
+        this.setState(() => ({
+            section: newValue
+
+        }));
+    };
+
     render() {
-        return(
+        return (
 
 
             <div>
                 {this.props.user.logged.id ?
 
-                    this.props.questions.questions.map(el => {
-                        return (<QuestionCard question={el}/>)
-                    })
+                    <div>
+
+                    <AppBar position="static">
+                        <Tabs value={this.state.section} onChange={this.chooseSection}>
+                            <Tab label="Unanswered question"/>
+                            <Tab label="Answered question"/>
+                        </Tabs>
+                    </AppBar>
+
+                    {this.state.section === 0 &&  this.props.questions.questions.map(el => {
+                    return (<QuestionCard question={el}/>)
+                    })}
+
+                    {this.state.section === 1 && <p>Item Two</p>}
+
+
+                    </div>
 
                     :
 
-                <UserSelection/>
+                    <UserSelection/>
 
                 }
 
@@ -54,7 +95,7 @@ class Home extends React.Component{
 
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
 
     return {
         addQuestion: question => dispatch(addQuestion(question))
@@ -64,7 +105,7 @@ const mapDispatchToProps = dispatch =>{
 };
 
 const mapStateToProps = state => {
-    return{
+    return {
         questions: state.questions,
         user: state.user
     };
