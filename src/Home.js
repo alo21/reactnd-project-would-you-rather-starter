@@ -19,15 +19,21 @@ class Home extends React.Component {
         this.state = {
 
             section: 0
-
         };
 
-        this.chooseSection = this.chooseSection.bind(this)
+        this.chooseSection = this.chooseSection.bind(this);
 
 
     }
 
     componentDidMount() {
+        this.loadQuestions();
+
+    }
+
+    loadQuestions = function(){
+
+        if (this.props.questions.questions.length === 0) {
 
         let questionsId = [];
 
@@ -45,9 +51,8 @@ class Home extends React.Component {
         }).catch(e => {
             console.log("Error while loading questions", e);
         });
-
-
-    }
+        }
+    };
 
 
     chooseSection = function (event, newValue) {
@@ -58,6 +63,7 @@ class Home extends React.Component {
         }));
     };
 
+
     render() {
         return (
 
@@ -67,24 +73,28 @@ class Home extends React.Component {
 
                     <div>
 
-                    <AppBar position="static">
-                        <Tabs value={this.state.section} onChange={this.chooseSection}>
-                            <Tab label="Unanswered question"/>
-                            <Tab label="Answered question"/>
-                        </Tabs>
-                    </AppBar>
-                        
-                    {this.state.section === 0 &&  this.props.questions.questions.map(el => {
+                        <AppBar position="static">
+                            <Tabs value={this.state.section} onChange={this.chooseSection}>
+                                <Tab label="Unanswered question"/>
+                                <Tab label="Answered question"/>
+                            </Tabs>
+                        </AppBar>
 
-                        if (!Object.keys(this.props.user.logged.answers).includes(el.id)){return (<QuestionCard question={el}/>)}
+                        {this.state.section === 0 && this.props.questions.questions.map(el => {
 
-                    })}
+                            if (!Object.keys(this.props.user.logged.answers).includes(el.id)) {
+                                return (<QuestionCard question={el}/>)
+                            }
 
-                    {this.state.section === 1 &&  this.props.questions.questions.map(el => {
+                        })}
 
-                        if (Object.keys(this.props.user.logged.answers).includes(el.id)){return (<QuestionCard question={el}/>)}
+                        {this.state.section === 1 && this.props.questions.questions.map(el => {
 
-                    })}
+                            if (Object.keys(this.props.user.logged.answers).includes(el.id)) {
+                                return (<QuestionCard question={el}/>)
+                            }
+
+                        })}
 
 
                     </div>

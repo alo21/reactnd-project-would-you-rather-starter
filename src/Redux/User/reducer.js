@@ -1,6 +1,6 @@
 const initialState = {
     users: [],
-    logged: []
+    logged: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,8 +11,6 @@ const reducer = (state = initialState, action) => {
     if (action.type === 'ADD_USER') {
 
         users = state.users;
-        loggedUser = state.logged;
-
         users.push(action.payload);
         loggedUser = action.payload;
 
@@ -36,7 +34,20 @@ const reducer = (state = initialState, action) => {
             logged: action.payload
         }
 
+    } else if (action.type === 'ADD_QUESTION_TO_USER') {
+
+
+        let loggedUser = state.logged;
+
+        loggedUser.questions.push(action.payload);
+
+
+        return {
+            ...state,
+            logged: loggedUser
+        }
     }
+
 
     return state
 };
