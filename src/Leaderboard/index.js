@@ -1,9 +1,41 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {addUser} from "../Redux/User/action";
+import LeadCard from './LeadCard'
 
 
 class Index extends React.Component{
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            sortedUsers: []
+        };
+
+        this.sortUsers = this.sortUsers.bind(this);
+
+    }
+
+    componentDidMount() {
+        this.sortUsers();
+
+    }
+
+    sortUsers = function(){
+
+        let sortedUsers = this.props.users.sort(function (a, b) {
+
+            let totB = (Object.keys(b.answers).length + b.questions.length);
+            let totA = (Object.keys(a.answers).length + a.questions.length);
+
+           return (totB - totA)
+        });
+
+        this.setState({
+            sortedUsers: sortedUsers
+        });
+        
+    };
 
     render() {
 
@@ -11,7 +43,11 @@ class Index extends React.Component{
 
             <div>
 
-                <p>This is the leadboard</p>
+                {this.state.sortedUsers.map(user => {
+
+                    return(<LeadCard user={user}/>)
+
+                })}
 
             </div>
 
@@ -21,14 +57,15 @@ class Index extends React.Component{
 const mapDispatchToProps = dispatch =>{
 
     return {
-        addUser: user => dispatch(addUser(user))
     };
 
 
 };
 
 const mapStateToProps = state => {
-    return{};
+    return{
+        users: state.user.users
+    };
 };
 
 const leadboard = connect(mapStateToProps, mapDispatchToProps)(Index);
