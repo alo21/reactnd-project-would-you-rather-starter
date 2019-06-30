@@ -6,19 +6,19 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
     let users;
-    let loggedUser;
+    // let loggedUser;
 
     if (action.type === 'ADD_USER') {
 
         users = state.users;
         users.push(action.payload);
-        loggedUser = action.payload;
+        // loggedUser = action.payload;
 
 
         return {
             ...state,
             users: users,
-            logged: loggedUser
+            // logged: loggedUser
         }
     } else if (action.type === 'LOGOUT') {
 

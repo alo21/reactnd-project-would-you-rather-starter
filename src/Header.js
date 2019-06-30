@@ -6,14 +6,6 @@ import {_getUsers} from "./_DATA";
 import Button from '@material-ui/core/Button';
 
 
-const buttonStyle = {
-
-    'home-button': {
-        color: 'red'
-    }
-
-};
-
 class Header extends React.Component {
 
 
@@ -31,11 +23,6 @@ class Header extends React.Component {
 
         }).catch(err => console.log('Unable to load users', err));
     }
-
-    logoutUser = function () {
-
-
-    };
 
     render() {
 

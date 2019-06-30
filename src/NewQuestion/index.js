@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {addUser, addQuestionIdToUser} from "../Redux/User/action";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {addQuestionIdToUser, addUser} from "../Redux/User/action";
 import {addQuestion} from "../Redux/Question/action";
 import {_saveQuestion} from "../_DATA";
-import { withRouter } from 'react-router';
-
+import {withRouter} from 'react-router';
+import UserSelection from "../UserSelection";
+import {TextField} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 
 
 class Index extends React.Component {
@@ -78,59 +78,65 @@ class Index extends React.Component {
         });
 
 
-
     };
 
 
+    render() {
+
+        return (
+
+            <div>
+
+                {this.props.user.id ?
+
+                    <div>
+
+                    <h4>Create New Question</h4>
+                        <hr></hr>
+
+                    <p>Complete the question:</p>
 
 
+                    <TextField
+                    id="option1"
+                    label="Would you rather..."
+                    margin="normal"
+                    onChange={this.setFirstQuestion}
+                    />
 
-render()
-{
+                    <br></br>
+                    <br></br>
 
-    return (
+                    <TextField
+                    id="option2"
+                    label="or"
+                    margin="normal"
+                    onChange={this.setSecondQuestion}
+                    />
 
-        <div>
+                    <br></br>
+                    <br></br>
 
-            <h4>Create New Question</h4>
-            <hr></hr>
+                    <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={this.submitQuestion}
+                    >
 
-            <p>Complete the question:</p>
+                    Submit
+                    </Button>
 
+                    </div>
 
-            <TextField
-                id="option1"
-                label="Would you rather..."
-                margin="normal"
-                onChange={this.setFirstQuestion}
-            />
+                    :
 
-            <br></br>
-            <br></br>
+                    <UserSelection/>
 
-            <TextField
-                id="option2"
-                label="or"
-                margin="normal"
-                onChange={this.setSecondQuestion}
-            />
+                }
+            </div>
 
-            <br></br>
-            <br></br>
-
-            <Button
-                variant="outlined"
-                color="primary"
-                onClick={this.submitQuestion}
-            >
-
-                Submit
-            </Button>
-
-        </div>
-
-    )
-}
+        )
+    }
 }
 
 const mapDispatchToProps = dispatch => {

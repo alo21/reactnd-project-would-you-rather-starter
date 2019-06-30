@@ -14,7 +14,7 @@ class UserSelection extends React.Component {
 
                 <p>Sign in</p>
 
-                <InputLabel htmlFor="age-simple">User</InputLabel>
+                <InputLabel>User</InputLabel>
                 <Select
                     value={this.props.user.logged}
                     onChange={ event => this.props.loginUser(event.target.value)}>
