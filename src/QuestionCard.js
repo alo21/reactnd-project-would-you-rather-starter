@@ -40,7 +40,7 @@ class QuestionCard extends React.Component {
                             <CardMedia
                                 component="img"
                                 alt="Contemplative Reptile"
-                                image={require('./avatar/avatar3.png')}
+                                src={'https://lh3.googleusercontent.com/zoK5jSoqUAD4TL5Kx-hXMTKAqLdnD85u12JMlRz5LN1U4O071bsjCVUHYukwGiDPBtu8=w170'}
                                 height='140'
                                 title="Contemplative Reptile"
                             />
