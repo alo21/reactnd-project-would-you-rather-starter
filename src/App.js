@@ -5,6 +5,7 @@ import {Route} from 'react-router-dom';
 import Home from './Home.js';
 import New from './NewQuestion';
 import Leadboard from './Leaderboard';
+import QuestionDetail from './QuestionDetail'
 
 
 class App extends React.Component{
@@ -22,6 +23,7 @@ class App extends React.Component{
 
          <Route path={"/leadboard"} render={()=>(<Leadboard store={this.props.store}/>)}/>
 
+         <Route path={"/questions/:question_id"} render={()=>(<QuestionDetail store={this.props.store}/>)}/>
 
         </div>
 

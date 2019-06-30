@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import {addUser, logoutUser} from './Redux/User/action'
 import {connect} from "react-redux";
 import {_getUsers} from "./_DATA";
+import Button from '@material-ui/core/Button';
+
 
 const buttonStyle = {
 
@@ -30,8 +32,7 @@ class Header extends React.Component {
         }).catch(err => console.log('Unable to load users', err));
     }
 
-    logoutUser = function(){
-
+    logoutUser = function () {
 
 
     };
@@ -42,21 +43,26 @@ class Header extends React.Component {
 
             <div>
                 <Link to={'/'}>
-                    <button className="home-button" style={buttonStyle}>Home</button>
+                    <Button variant="outlined" color="primary">
+                        Home
+                    </Button>
                 </Link>
-
+                &nbsp;&nbsp;
                 <Link to={'/new'}>
-                    <button>New Question</button>
+                    <Button variant="outlined" color="primary">
+                        New Question
+                    </Button>
                 </Link>
-
+                &nbsp;&nbsp;
                 <Link to={'/leadboard'}>
-                    <button>Leader Board</button>
+                    <Button variant="outlined" color="primary">
+                        Leader Board
+                    </Button>
                 </Link>
 
 
-                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.user.logged.id}</label>
-
-                {this.props.user.logged.id ? <button onClick={this.props.logoutUser}>logut </button>: ''}
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.user.logged.id}</label>&nbsp;&nbsp;
+                {this.props.user.logged.id ? <button onClick={this.props.logoutUser}>logut </button> : ''}
 
 
                 <hr/>

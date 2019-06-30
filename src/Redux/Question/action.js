@@ -5,3 +5,11 @@ export const addQuestion = question => {
         payload: question
     }
 };
+
+export const setCurrentQuestion = question => {
+
+    return{
+        type: 'SET_CURRENT',
+        payload: question
+    }
+};

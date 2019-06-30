@@ -1,5 +1,6 @@
 const initialState = {
-    questions: []
+    questions: [],
+    current: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +22,14 @@ const reducer = (state = initialState, action) => {
             questions: questions
 
         }
+    } else if (action.type === 'SET_CURRENT') {
+
+        return {
+            ...state,
+            current: action.payload
+        }
+
+
     }
 
 
