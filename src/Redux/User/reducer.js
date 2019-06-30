@@ -46,6 +46,23 @@ const reducer = (state = initialState, action) => {
             ...state,
             logged: loggedUser
         }
+    } else if (action.type === 'ADD_ANSWER_TO_USER') {
+
+
+        let loggedUser = state.logged;
+
+        const key = action.payload.questionId;
+        const answer = action.payload.answer;
+
+        let answers = loggedUser.answers;
+
+        Object.assign(answers, {[key]: answer});
+
+
+        return {
+            ...state,
+            logged: loggedUser
+        }
     }
 
 

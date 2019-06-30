@@ -26,3 +26,10 @@ export const addQuestionIdToUser = question => {
     }
 };
 
+export const addAnswerToUser = (questionId, answer) => {
+    return {
+        type: 'ADD_ANSWER_TO_USER',
+        payload: {questionId, answer}
+    }
+};
+

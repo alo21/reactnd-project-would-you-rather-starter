@@ -30,6 +30,26 @@ const reducer = (state = initialState, action) => {
         }
 
 
+    } else if (action.type === 'ADD_ANSWER_TO_QUESTION') {
+
+        console.log(action.payload);
+
+        let currentQuestion = state.questions.filter(question => {
+            return question.id === action.payload.questionId
+        });
+
+        let currentVotes = currentQuestion[0][action.payload.answer];
+
+        currentVotes.votes.push(action.payload.userId);
+
+
+
+        return {
+            ...state,
+            currentQuestion
+        }
+
+
     }
 
 

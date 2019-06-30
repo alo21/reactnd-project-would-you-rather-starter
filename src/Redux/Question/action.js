@@ -13,3 +13,11 @@ export const setCurrentQuestion = question => {
         payload: question
     }
 };
+
+export const addAnswerToQuestion = (questionId, answer, userId) => {
+
+    return{
+        type: 'ADD_ANSWER_TO_QUESTION',
+        payload: {questionId, answer, userId}
+    }
+};

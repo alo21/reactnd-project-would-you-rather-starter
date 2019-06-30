@@ -40,7 +40,7 @@ class QuestionCard extends React.Component {
 
                     <CardActions>
                         <Link to={'/questions/' + this.props.question.id}>
-                            <Button size="small" onClick={this.setQuestion}>Open</Button>
+                            <Button size="small" variant={'outlined'} onClick={this.setQuestion}>Open</Button>
                         </Link>
                     </CardActions>
 
