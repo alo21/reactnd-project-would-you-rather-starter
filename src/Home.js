@@ -50,15 +50,14 @@ class Home extends React.Component {
 
                 });
 
-                this.sortQuestion();
-
-
 
                 console.log("Questions loaded successfully");
             }).catch(e => {
                 console.log("Error while loading questions", e);
             });
         }
+
+        this.sortQuestion();
     };
 
 

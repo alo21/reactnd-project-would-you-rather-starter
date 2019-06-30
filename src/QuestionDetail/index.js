@@ -146,6 +146,8 @@ class QuestionDetail extends React.Component {
                                         color="secondary"
                                         value={this.props.numVoteOptOne / this.state.totalAnswers * 100}
                                     />
+                                    {this.props.answeredQuestions[this.props.currentQuestion.id] === 'optionOne' ? <p>Your Vote</p> : ''}
+
                                     <br/>
                                     <br/>
                                     <br/>
@@ -163,7 +165,7 @@ class QuestionDetail extends React.Component {
                                         color="secondary"
                                         value={this.props.numVoteOptTwo / this.state.totalAnswers * 100}
                                     />
-
+                                    {this.props.answeredQuestions[this.props.currentQuestion.id] === 'optionTwo' ? <p>Your Vote</p> : ''}
                                     <br/>
                                     <br/>
                                 </CardContent>
