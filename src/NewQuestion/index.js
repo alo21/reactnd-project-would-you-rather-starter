@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {addQuestion} from "../Redux/Question/action";
 import {_saveQuestion} from "../_DATA";
+import { withRouter } from 'react-router';
+
 
 
 class Index extends React.Component {
@@ -66,11 +68,16 @@ class Index extends React.Component {
                 generatedQuestion
             );
 
-            this.props.addQuestionIdToUser(generatedQuestion.id)
+            this.props.addQuestionIdToUser(generatedQuestion.id);
+
+
+            this.props.history.push('/');
 
         }).catch(err => {
             console.log('errore', err)
         });
+
+
 
     };
 
@@ -145,4 +152,4 @@ const mapStateToProps = state => {
 
 const newComp = connect(mapStateToProps, mapDispatchToProps)(Index);
 
-export default newComp;
+export default withRouter(newComp);
