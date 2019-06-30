@@ -9,7 +9,6 @@ import QuestionCard from './QuestionCard'
 import UserSelection from './UserSelection'
 
 
-
 class Home extends React.Component {
 
 
@@ -19,42 +18,63 @@ class Home extends React.Component {
 
         this.state = {
 
-            section: 0
+            section: 0,
+            sortedQuestions: []
         };
 
         this.chooseSection = this.chooseSection.bind(this);
+        this.sortQuestion = this.sortQuestion.bind(this);
+
 
 
     }
 
     componentDidMount() {
+
         this.loadQuestions();
 
     }
 
-    loadQuestions = function(){
+    loadQuestions = function () {
 
         if (this.props.questions.questions.length === 0) {
 
-        let questionsId = [];
+            let questionsId = [];
 
-        _getQuestions().then(res => {
+            _getQuestions().then(res => {
 
-            questionsId = Object.values(res);
+                questionsId = Object.values(res);
 
-            questionsId.forEach(question => {
-                this.props.addQuestion(question);
+                questionsId.forEach(question => {
+                    this.props.addQuestion(question);
 
+                });
+
+                this.sortQuestion();
+
+
+
+                console.log("Questions loaded successfully");
+            }).catch(e => {
+                console.log("Error while loading questions", e);
             });
-
-
-            console.log("Questions loaded successfully");
-        }).catch(e => {
-            console.log("Error while loading questions", e);
-        });
         }
     };
 
+
+    sortQuestion = function(){
+
+        let sortedQuestions = this.props.questions.questions.sort(function (a, b) {
+
+            return(b.timestamp - a.timestamp)
+        });
+
+        this.setState({
+            sortedQuestions: sortedQuestions
+        });
+
+
+    };
 
     chooseSection = function (event, newValue) {
 
@@ -81,7 +101,7 @@ class Home extends React.Component {
                             </Tabs>
                         </AppBar>
 
-                        {this.state.section === 0 && this.props.questions.questions.map(el => {
+                        {this.state.section === 0 && this.state.sortedQuestions.map(el => {
 
                             if (!Object.keys(this.props.user.logged.answers).includes(el.id)) {
                                 return (<QuestionCard question={el}/>)
@@ -89,7 +109,7 @@ class Home extends React.Component {
 
                         })}
 
-                        {this.state.section === 1 && this.props.questions.questions.map(el => {
+                        {this.state.section === 1 && this.state.sortedQuestions.map(el => {
 
                             if (Object.keys(this.props.user.logged.answers).includes(el.id)) {
                                 return (<QuestionCard question={el}/>)
