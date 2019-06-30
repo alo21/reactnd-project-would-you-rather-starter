@@ -10,7 +10,7 @@ class UserSelection extends React.Component {
 
     render() {
         return (
-            <div>
+            <div key='login'>
 
                 <p>Sign in</p>
 
@@ -20,7 +20,7 @@ class UserSelection extends React.Component {
                     onChange={ event => this.props.loginUser(event.target.value)}>
 
                     {this.props.user.users.map(user => {
-                        return (<MenuItem value={user}>{user.id}</MenuItem>)
+                        return (<MenuItem value={user} key={user.id}>{user.id}</MenuItem>)
 
                     })}
 

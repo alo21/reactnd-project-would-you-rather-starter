@@ -45,7 +45,7 @@ class Index extends React.Component{
 
                 {this.state.sortedUsers.map(user => {
 
-                    return(<LeadCard user={user}/>)
+                    return(<LeadCard user={user} key={user.id}/>)
 
                 })}
 

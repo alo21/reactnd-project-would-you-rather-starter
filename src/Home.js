@@ -57,7 +57,7 @@ class Home extends React.Component {
             });
         }
 
-        this.sortQuestion();
+        this.sortQuestion()
     };
 
 
@@ -103,7 +103,7 @@ class Home extends React.Component {
                         {this.state.section === 0 && this.state.sortedQuestions.map(el => {
 
                             if (!Object.keys(this.props.user.logged.answers).includes(el.id)) {
-                                return (<QuestionCard question={el}/>)
+                                return (<QuestionCard question={el} key={el.id}/>)
                             }
 
                         })}
@@ -111,7 +111,7 @@ class Home extends React.Component {
                         {this.state.section === 1 && this.state.sortedQuestions.map(el => {
 
                             if (Object.keys(this.props.user.logged.answers).includes(el.id)) {
-                                return (<QuestionCard question={el}/>)
+                                return (<QuestionCard question={el} key={el.id}/>)
                             }
 
                         })}

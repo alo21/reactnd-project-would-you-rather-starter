@@ -5,8 +5,7 @@ import {addQuestion} from "../Redux/Question/action";
 import {_saveQuestion} from "../_DATA";
 import {withRouter} from 'react-router';
 import UserSelection from "../UserSelection";
-import {TextField} from "@material-ui/core";
-import {Button} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 
 
 class Index extends React.Component {
@@ -91,40 +90,40 @@ class Index extends React.Component {
 
                     <div>
 
-                    <h4>Create New Question</h4>
+                        <h4>Create New Question</h4>
                         <hr></hr>
 
-                    <p>Complete the question:</p>
+                        <p>Complete the question:</p>
 
 
-                    <TextField
-                    id="option1"
-                    label="Would you rather..."
-                    margin="normal"
-                    onChange={this.setFirstQuestion}
-                    />
+                        <TextField
+                            id="option1"
+                            label="Would you rather..."
+                            margin="normal"
+                            onChange={this.setFirstQuestion}
+                        />
 
-                    <br></br>
-                    <br></br>
+                        <br></br>
+                        <br></br>
 
-                    <TextField
-                    id="option2"
-                    label="or"
-                    margin="normal"
-                    onChange={this.setSecondQuestion}
-                    />
+                        <TextField
+                            id="option2"
+                            label="or"
+                            margin="normal"
+                            onChange={this.setSecondQuestion}
+                        />
 
-                    <br></br>
-                    <br></br>
+                        <br></br>
+                        <br></br>
 
-                    <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={this.submitQuestion}
-                    >
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={this.submitQuestion}
+                        >
 
-                    Submit
-                    </Button>
+                            Submit
+                        </Button>
 
                     </div>
 
