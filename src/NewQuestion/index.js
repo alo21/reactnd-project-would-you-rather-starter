@@ -28,8 +28,6 @@ class Index extends React.Component {
 
     setFirstQuestion = function (event) {
 
-        console.log(event.target.value);
-
         let value = event.target.value;
         this.setState(() => ({
             firstQuestion: value
@@ -39,8 +37,6 @@ class Index extends React.Component {
     };
 
     setSecondQuestion = function (event) {
-
-        console.log(event.target.value);
 
         let value = event.target.value;
 
@@ -61,8 +57,6 @@ class Index extends React.Component {
         });
 
         _saveQuestion(newQuestion).then(generatedQuestion => {
-            console.log('domanda salvata', generatedQuestion);
-
             this.props.addQuestion(
                 generatedQuestion
             );

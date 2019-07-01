@@ -27,6 +27,16 @@ class QuestionCard extends React.Component {
 
     };
 
+    getAvatar = function(userId){
+
+        let user = this.props.users.filter(user => {
+            return user.id === userId
+        });
+
+        return user[0].avatarURL;
+
+    };
+
     render() {
         return (
             <div>
@@ -35,23 +45,23 @@ class QuestionCard extends React.Component {
 
                     <Grid container justify={'center'}>
 
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <p>{this.props.question.author + ' asks:'}</p>
                             <CardMedia
                                 component="img"
                                 alt="Contemplative Reptile"
-                                src={'https://lh3.googleusercontent.com/zoK5jSoqUAD4TL5Kx-hXMTKAqLdnD85u12JMlRz5LN1U4O071bsjCVUHYukwGiDPBtu8=w170'}
+                                image={this.getAvatar(this.props.question.author)}
                                 height='140'
                                 title="Contemplative Reptile"
                             />
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     Would you rather...
                                 </Typography>
 
-                                <p>{this.props.question.optionOne.text}</p>
+                                <p>{'...' + this.props.question.optionOne.text + '...'}</p>
 
 
                             </CardContent>
@@ -86,7 +96,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        questions: state.questions
+        questions: state.questions,
+        users: state.user.users
     };
 };
 

@@ -34,8 +34,6 @@ class QuestionDetail extends React.Component {
 
     onSubmit = function(){
 
-        console.log(this.state.currentAnswer);
-
         const obj = {
 
             authedUser: this.props.user,
@@ -58,6 +56,16 @@ class QuestionDetail extends React.Component {
 
     };
 
+    getAvatar = function(userId){
+
+        let user = this.props.users.filter(user => {
+            return user.id === userId
+        });
+
+        return user[0].avatarURL;
+
+    };
+
     render() {
         return (
 
@@ -74,7 +82,7 @@ class QuestionDetail extends React.Component {
                                     component="img"
                                     alt="Contemplative Reptile"
                                     height="140"
-                                    image={require('../avatar/google.jpg')}
+                                    image={this.getAvatar(this.props.currentQuestion.author)}
                                     title="Contemplative Reptile"
                                 />
                             </Grid>
@@ -119,16 +127,16 @@ class QuestionDetail extends React.Component {
 
                         <Grid container justify={'center'}>
 
-                            <Grid item xs={4}>
+                            <Grid item xs={2}>
                                 <CardMedia
                                     component="img"
                                     alt="Contemplative Reptile"
                                     height="140"
-                                    image={require('../avatar/google.jpg')}
+                                    image={this.getAvatar(this.props.currentQuestion.author)}
                                     title="Contemplative Reptile"
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={2}>
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         Results
@@ -201,7 +209,8 @@ const mapStateToProps = state => {
         numVoteOptOne: state.questions.current.optionOne.votes.length,
         numVoteOptTwo: state.questions.current.optionTwo.votes.length,
         avatar: state.user.logged.avatarURL,
-        user: state.user.logged
+        user: state.user.logged,
+        users: state.user.users
 
     };
 };

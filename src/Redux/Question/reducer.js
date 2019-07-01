@@ -11,8 +11,6 @@ const reducer = (state = initialState, action) => {
     if (action.type === 'ADD_QUESTION') {
 
 
-        console.log('question', action.payload);
-
         questions = state.questions;
 
         questions.push(action.payload);
@@ -32,7 +30,6 @@ const reducer = (state = initialState, action) => {
 
     } else if (action.type === 'ADD_ANSWER_TO_QUESTION') {
 
-        console.log(action.payload);
 
         let currentQuestion = state.questions.filter(question => {
             return question.id === action.payload.questionId

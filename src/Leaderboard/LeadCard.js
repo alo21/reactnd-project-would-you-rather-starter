@@ -1,5 +1,4 @@
 import React from 'react';
-import {addUser} from "../Redux/User/action";
 import {connect} from "react-redux";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
@@ -24,7 +23,7 @@ class LeadCard extends React.Component {
                                 component="img"
                                 alt="Contemplative Reptile"
                                 height="140"
-                                image={require('../avatar/google.jpg')}
+                                image={this.props.user.avatarURL}
                                 title="Contemplative Reptile"
                             />
                         </Grid>
@@ -69,7 +68,6 @@ class LeadCard extends React.Component {
 const mapDispatchToProps = dispatch => {
 
     return {
-        addUser: user => dispatch(addUser(user))
     };
 
 
