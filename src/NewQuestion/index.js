@@ -22,7 +22,6 @@ class Index extends React.Component {
         this.setFirstQuestion = this.setFirstQuestion.bind(this);
         this.setSecondQuestion = this.setSecondQuestion.bind(this);
         this.submitQuestion = this.submitQuestion.bind(this);
-        this.checkCanSubmit = this.checkCanSubmit.bind(this);
 
 
     }
@@ -96,21 +95,6 @@ class Index extends React.Component {
 
 
     };
-
-    checkCanSubmit = function () {
-
-        if (this.state.firstQuestion !== '' || this.state.secondQuestion !== '') {
-
-            this.setState({
-                submitDisabled: false
-            })
-        } else {
-            this.setState({
-                submitDisabled: true
-            })
-        }
-    };
-
 
     render() {
 
