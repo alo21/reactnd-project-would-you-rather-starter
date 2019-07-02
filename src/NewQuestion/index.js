@@ -15,12 +15,14 @@ class Index extends React.Component {
 
         this.state = {
             firstQuestion: '',
-            secondQuestion: ''
+            secondQuestion: '',
+            submitDisabled: true
         };
 
         this.setFirstQuestion = this.setFirstQuestion.bind(this);
         this.setSecondQuestion = this.setSecondQuestion.bind(this);
         this.submitQuestion = this.submitQuestion.bind(this);
+        this.checkCanSubmit = this.checkCanSubmit.bind(this);
 
 
     }
@@ -34,6 +36,17 @@ class Index extends React.Component {
 
         }));
 
+        if (value === '' || this.state.secondQuestion === '' ) {
+            this.setState({
+                submitDisabled: true
+            })
+        } else {
+
+            this.setState({
+                submitDisabled: false
+            })
+        }
+
     };
 
     setSecondQuestion = function (event) {
@@ -44,6 +57,17 @@ class Index extends React.Component {
             secondQuestion: value
 
         }));
+
+        if (value === '' || this.state.firstQuestion === '' ) {
+            this.setState({
+                submitDisabled: true
+            })
+        } else {
+
+            this.setState({
+                submitDisabled: false
+            })        }
+
 
     };
 
@@ -71,6 +95,20 @@ class Index extends React.Component {
         });
 
 
+    };
+
+    checkCanSubmit = function () {
+
+        if (this.state.firstQuestion !== '' || this.state.secondQuestion !== '') {
+
+            this.setState({
+                submitDisabled: false
+            })
+        } else {
+            this.setState({
+                submitDisabled: true
+            })
+        }
     };
 
 
@@ -113,6 +151,7 @@ class Index extends React.Component {
                         <Button
                             variant="outlined"
                             color="primary"
+                            disabled={this.state.submitDisabled}
                             onClick={this.submitQuestion}
                         >
 

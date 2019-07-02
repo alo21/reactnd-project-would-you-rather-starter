@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
 import LeadCard from './LeadCard'
+import UserSelection from "../UserSelection";
 
 
-class Index extends React.Component{
+class Index extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -21,50 +22,61 @@ class Index extends React.Component{
 
     }
 
-    sortUsers = function(){
+    sortUsers = function () {
 
         let sortedUsers = this.props.users.sort(function (a, b) {
 
             let totB = (Object.keys(b.answers).length + b.questions.length);
             let totA = (Object.keys(a.answers).length + a.questions.length);
 
-           return (totB - totA)
+            return (totB - totA)
         });
 
         this.setState({
             sortedUsers: sortedUsers
         });
-        
+
     };
 
     render() {
 
-        return(
+        return (
 
             <div>
 
-                {this.state.sortedUsers.map(user => {
+                {this.props.loggedUser.id ?
 
-                    return(<LeadCard user={user} key={user.id}/>)
+                    <div>
 
-                })}
+                        {this.state.sortedUsers.map(user => {
 
+                            return (<LeadCard user={user} key={user.id}/>)
+
+                        })}
+
+                    </div>
+
+                    :
+                    <UserSelection/>
+
+                }
             </div>
 
-        )}
+        )
+    }
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
 
-    return {
-    };
+    return {};
 
 
 };
 
 const mapStateToProps = state => {
-    return{
-        users: state.user.users
+    return {
+        users: state.user.users,
+        loggedUser: state.user.logged
     };
 };
 

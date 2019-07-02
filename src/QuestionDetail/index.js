@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {addAnswerToUser} from '../Redux/User/action'
 import {_saveQuestionAnswer} from "../_DATA";
 import {addAnswerToQuestion} from "../Redux/Question/action";
+import UserSelection from "../UserSelection";
 
 
 class QuestionDetail extends React.Component {
@@ -32,7 +33,7 @@ class QuestionDetail extends React.Component {
 
     }
 
-    onSubmit = function(){
+    onSubmit = function () {
 
         const obj = {
 
@@ -56,7 +57,7 @@ class QuestionDetail extends React.Component {
 
     };
 
-    getAvatar = function(userId){
+    getAvatar = function (userId) {
 
         let user = this.props.users.filter(user => {
             return user.id === userId
@@ -67,123 +68,152 @@ class QuestionDetail extends React.Component {
     };
 
     render() {
+
+        if (this.props.currentQuestion.id === undefined && this.props.user.id === undefined) {
+            return (<UserSelection/>)
+
+        }
+
         return (
 
             <div>
 
-                {!Object.keys(this.props.answeredQuestions).includes(this.props.currentQuestion.id) ?
+                {this.props.currentQuestion.id ?
 
-                    <Card>
+                    <div>
 
-                        <Grid container justify={'center'}>
+                        {!Object.keys(this.props.answeredQuestions).includes(this.props.currentQuestion.id) ?
 
-                            <Grid item xs={4}>
-                                <CardMedia
-                                    component="img"
-                                    alt="Contemplative Reptile"
-                                    height="140"
-                                    image={this.getAvatar(this.props.currentQuestion.author)}
-                                    title="Contemplative Reptile"
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        Would you rather...
-                                    </Typography>
-                                    <FormControl component="fieldset">
-                                        <RadioGroup aria-label="position" name="position" onChange={event => this.setState({currentAnswer: event.target.value})} row>
-                                            <FormControlLabel
-                                                value="optionOne"
-                                                control={<Radio color="primary"/>}
-                                                label={this.props.currentQuestion.optionOne.text}
-                                                labelPlacement="end"
+                            <Card>
+
+                                <Grid container justify={'center'}>
+
+                                    <Grid item xs={4}>
+                                        <CardMedia
+                                            component="img"
+                                            alt="Contemplative Reptile"
+                                            height="140"
+                                            image={this.getAvatar(this.props.currentQuestion.author)}
+                                            title="Contemplative Reptile"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Would you rather...
+                                            </Typography>
+                                            <FormControl component="fieldset">
+                                                <RadioGroup aria-label="position" name="position"
+                                                            onChange={event => this.setState({currentAnswer: event.target.value})}
+                                                            row>
+                                                    <FormControlLabel
+                                                        value="optionOne"
+                                                        control={<Radio color="primary"/>}
+                                                        label={this.props.currentQuestion.optionOne.text}
+                                                        labelPlacement="end"
+                                                    />
+                                                    <FormControlLabel
+                                                        value="optionTwo"
+                                                        control={<Radio color="primary"/>}
+                                                        label={this.props.currentQuestion.optionTwo.text}
+                                                        labelPlacement="end"
+                                                    />
+                                                </RadioGroup>
+                                            </FormControl>
+
+                                            <br/>
+                                            <br/>
+
+                                            <Button variant="outlined" color="primary"
+                                                    onClick={this.onSubmit}>Submit</Button>
+
+                                        </CardContent>
+                                    </Grid>
+
+
+                                </Grid>
+
+                            </Card>
+
+                            :
+
+                            <Card>
+
+                                <Grid container justify={'center'}>
+
+                                    <Grid item xs={2}>
+                                        <CardMedia
+                                            component="img"
+                                            alt="Contemplative Reptile"
+                                            height="140"
+                                            image={this.getAvatar(this.props.currentQuestion.author)}
+                                            title="Contemplative Reptile"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                Results
+                                            </Typography>
+
+                                            <Badge color="secondary" variant="standard"
+                                                   badgeContent={this.props.currentQuestion.optionOne.votes.length}
+                                                   showZero={true}>
+
+                                                <p>{'Would you rather' + this.props.currentQuestion.optionOne.text}</p>
+
+                                            </Badge>
+
+                                            <LinearProgress
+                                                variant="determinate"
+                                                color="secondary"
+                                                value={this.props.currentQuestion.optionOne.votes.length / this.state.totalAnswers * 100}
                                             />
-                                            <FormControlLabel
-                                                value="optionTwo"
-                                                control={<Radio color="primary"/>}
-                                                label={this.props.currentQuestion.optionTwo.text}
-                                                labelPlacement="end"
+                                            {this.props.answeredQuestions[this.props.currentQuestion.id] === 'optionOne' ?
+                                                <p>Your Vote</p> : ''}
+
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+
+                                            <Badge color="secondary" variant="standard"
+                                                   badgeContent={this.props.currentQuestion.optionTwo.votes.length}
+                                                   showZero={true}>
+
+                                                <p>{'Would you rather' + this.props.currentQuestion.optionTwo.text}</p>
+
+                                            </Badge>
+
+                                            <LinearProgress
+                                                variant="determinate"
+                                                color="secondary"
+                                                value={this.props.currentQuestion.optionTwo.votes.length / this.state.totalAnswers * 100}
                                             />
-                                        </RadioGroup>
-                                    </FormControl>
-
-                                    <br/>
-                                    <br/>
-
-                                    <Button variant="outlined" color="primary" onClick={this.onSubmit}>Submit</Button>
-
-                                </CardContent>
-                            </Grid>
+                                            {this.props.answeredQuestions[this.props.currentQuestion.id] === 'optionTwo' ?
+                                                <p>Your Vote</p> : ''}
+                                            <br/>
+                                            <br/>
+                                        </CardContent>
+                                    </Grid>
 
 
-                        </Grid>
+                                </Grid>
 
-                    </Card>
+                            </Card>
+                        }
+                    </div>
 
                     :
 
-                    <Card>
+                    <div>
+                        <p>This poll is not reachable directly from URL address</p>
+                        <p>Please go to home page</p>
+                    </div>
 
-                        <Grid container justify={'center'}>
-
-                            <Grid item xs={2}>
-                                <CardMedia
-                                    component="img"
-                                    alt="Contemplative Reptile"
-                                    height="140"
-                                    image={this.getAvatar(this.props.currentQuestion.author)}
-                                    title="Contemplative Reptile"
-                                />
-                            </Grid>
-                            <Grid item xs={2}>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        Results
-                                    </Typography>
-
-                                    <Badge color="secondary" variant="standard"
-                                           badgeContent={this.props.numVoteOptOne} showZero={true}>
-
-                                        <p>{'Would you rather' + this.props.currentQuestion.optionOne.text}</p>
-
-                                    </Badge>
-
-                                    <LinearProgress
-                                        variant="determinate"
-                                        color="secondary"
-                                        value={this.props.numVoteOptOne / this.state.totalAnswers * 100}
-                                    />
-                                    {this.props.answeredQuestions[this.props.currentQuestion.id] === 'optionOne' ? <p>Your Vote</p> : ''}
-
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-
-                                    <Badge color="secondary" variant="standard" badgeContent={this.props.numVoteOptTwo}
-                                           showZero={true}>
-
-                                        <p>{'Would you rather' + this.props.currentQuestion.optionTwo.text}</p>
-
-                                    </Badge>
-
-                                    <LinearProgress
-                                        variant="determinate"
-                                        color="secondary"
-                                        value={this.props.numVoteOptTwo / this.state.totalAnswers * 100}
-                                    />
-                                    {this.props.answeredQuestions[this.props.currentQuestion.id] === 'optionTwo' ? <p>Your Vote</p> : ''}
-                                    <br/>
-                                    <br/>
-                                </CardContent>
-                            </Grid>
-
-
-                        </Grid>
-
-                    </Card>
                 }
+
+
             </div>
 
         )
@@ -202,12 +232,14 @@ const mapDispatchToProps = dispatch => {
 
 };
 
+// currentQuestion.optionOne.votes.length
+
 const mapStateToProps = state => {
     return {
         currentQuestion: state.questions.current,
         answeredQuestions: state.user.logged.answers,
-        numVoteOptOne: state.questions.current.optionOne.votes.length,
-        numVoteOptTwo: state.questions.current.optionTwo.votes.length,
+        // numVoteOptOne: state.questions.current.optionOne.votes.length,
+        // numVoteOptTwo: state.questions.current.optionTwo.votes.length,
         avatar: state.user.logged.avatarURL,
         user: state.user.logged,
         users: state.user.users
